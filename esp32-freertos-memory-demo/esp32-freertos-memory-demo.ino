@@ -29,9 +29,18 @@ void testTask(void * parameter) {
     // Allocating some memory on heap
     int *ptr = (int *)pvPortMalloc(1024 * sizeof(int));
 
-    // do something with memeory so compiler doesn't optimize it out
-    for (int i = 0; i < 1024; i++) {
-      ptr[i] = 3;
+    // // do something with memeory so compiler doesn't optimize it out
+    // for (int i = 0; i < 1024; i++) {
+    //   ptr[i] = 3;
+    // }
+
+    // One way to check heap overflow is to check the malloc output
+    if (ptr == NULL) {
+      Serial.println("Not enough heap");
+    } else {
+      for (int i = 0; i < 1024; i++) {
+        ptr[i] = 3;
+      }
     }
 
     // Print out number of free heap memory bytes after malloc
