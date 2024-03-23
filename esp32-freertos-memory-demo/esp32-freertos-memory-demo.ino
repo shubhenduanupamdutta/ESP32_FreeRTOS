@@ -47,6 +47,8 @@ void testTask(void * parameter) {
     Serial.print("Heap after malloc (bytes): ");
     Serial.println(xPortGetFreeHeapSize());
 
+    vPortFree(ptr);
+
     // Wait for a while
     vTaskDelay(100 / portTICK_PERIOD_MS);
   }
