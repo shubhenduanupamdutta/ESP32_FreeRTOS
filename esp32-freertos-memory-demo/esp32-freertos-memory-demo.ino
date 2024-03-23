@@ -25,6 +25,21 @@ void testTask(void * parameter) {
     // Print out number of free heap memory bytes before malloc
     Serial.print("Heap before malloc (bytes): ");
     Serial.println(xPortGetFreeHeapSize());
+
+    // Allocating some memory on heap
+    int *ptr = (int *)pvPortMalloc(1024 * sizeof(int));
+
+    // do something with memeory so compiler doesn't optimize it out
+    for (int i = 0; i < 1024; i++) {
+      ptr[i] = 3;
+    }
+
+    // Print out number of free heap memory bytes after malloc
+    Serial.print("Heap after malloc (bytes): ");
+    Serial.println(xPortGetFreeHeapSize());
+
+    // Wait for a while
+    vTaskDelay(100 / portTICK_PERIOD_MS);
   }
 }
 
