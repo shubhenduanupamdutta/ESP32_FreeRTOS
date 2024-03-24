@@ -21,10 +21,12 @@ void printMessages(void *parameters) {
   while (1) {
     // See if there's a message in the queue (do not block)
     if(xQueueReceive(msg_queue, (void *)&item, 0) == pdTRUE) {
-      Serial.println(item);
+      // Serial.println(item);
     }
+
+    Serial.println(item);  // printing outside to see what happens when no new item is received
     // Wait before trying again
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    vTaskDelay(200 / portTICK_PERIOD_MS);
   }
 }
 
@@ -61,6 +63,6 @@ void loop() {
   num++;
 
   // Wait before loop
-  vTaskDelay(500 / portTICK_PERIOD_MS);
+  vTaskDelay(1000 / portTICK_PERIOD_MS);
 
 }
